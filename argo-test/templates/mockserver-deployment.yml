@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockserver-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      component: mockserver
+  template:
+    metadata:
+      labels:
+        component: mockserver
+    spec:
+      containers:
+        - name: server
+          image: hcmuleva/mockapiserver:latest
+          ports:
+            - containerPort: 8084
+          env:
+            
+            - name: MONGODB_DATABASE
+              value: dmfdb
+            - name: MONGODB_USERNAME
+              value: dmfuser
+            - name: MONGODB_PASSWORD
+              value: dmfpassword
+            
+            - name: MONGODB_HOSTNAME
+              value: mongodb
+            - name: REDIS_HOSTNAME
+              value: redis
