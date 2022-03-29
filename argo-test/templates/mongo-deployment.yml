@@ -26,6 +26,6 @@ spec:
               mountPath: /data/db
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-            value: mongoadmin
+              value: mongoadmin
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: secret
