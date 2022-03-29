@@ -11,14 +11,21 @@ spec:
     metadata:
       labels:
         component: mongo
+    spec:
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
       containers:
         - name: mongo
           image: mongo
           ports:
             - containerPort: 27017
-          
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: mongoadmin
+            value: mongoadmin
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: secret
